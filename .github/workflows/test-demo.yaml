@@ -2,17 +2,22 @@ name: TestDemo
 
 on:
     workflow_dispatch:
+        inputs:
+            is_build:
+                description: 'Do you want to build'
+                required: true
+                default: false
 
 jobs:
     build:
+        env:
+            IS_BUILD: ${{ inputs.is_build }}
+        if: env.IS_BUILD == 'true'
         runs-on: demo-lab # use lab for self-hosted runner
         steps:
             - name: Checkout
               uses: actions/checkout@v4
 
-            - name: Installing Java
-              run: sudo apt-get install openjdk-11-jdk -y
-            
             - name: Compling Code
               run: echo "Compiling Code" 
 
