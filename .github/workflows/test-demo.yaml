@@ -10,9 +10,8 @@ on:
 
 jobs:
     build:
-        env:
-            IS_BUILD: ${{ inputs.is_build }}
-        if: env.IS_BUILD == 'true'
+        
+        if: ${{ inputs.is_build }} == 'true'
         runs-on: demo-lab # use lab for self-hosted runner
         steps:
             - name: Checkout
